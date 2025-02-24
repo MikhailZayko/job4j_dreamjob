@@ -1,6 +1,5 @@
 package ru.job4j.dreamjob.repository;
 
-import org.springframework.stereotype.Repository;
 import ru.job4j.dreamjob.model.Vacancy;
 
 import java.time.LocalDateTime;
@@ -9,7 +8,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-@Repository
 public class MemoryVacancyRepository implements VacancyRepository {
 
     private static final MemoryVacancyRepository INSTANCE = new MemoryVacancyRepository();
@@ -19,12 +17,26 @@ public class MemoryVacancyRepository implements VacancyRepository {
     private final Map<Integer, Vacancy> vacancies = new HashMap<>();
 
     private MemoryVacancyRepository() {
-        save(new Vacancy(0, "Intern Java Developer", "1 lvl", LocalDateTime.now()));
-        save(new Vacancy(0, "Junior Java Developer", "2 lvl", LocalDateTime.now()));
-        save(new Vacancy(0, "Junior+ Java Developer", "3 lvl", LocalDateTime.now()));
-        save(new Vacancy(0, "Middle Java Developer", "4 lvl", LocalDateTime.now()));
-        save(new Vacancy(0, "Middle+ Java Developer", "5 lvl", LocalDateTime.now()));
-        save(new Vacancy(0, "Senior Java Developer", "Dream", LocalDateTime.now()));
+        save(new Vacancy(0, "Intern Java Developer",
+                "Вакансия стажера для получения практического опыта в разработке программного обеспечения",
+                LocalDateTime.of(2025, 1, 9, 12, 30, 59)));
+        save(new Vacancy(0, "Junior Java Developer",
+                "Вакансия младшего специалиста",
+                LocalDateTime.of(2025, 1, 25, 13, 10, 25)));
+        save(new Vacancy(0, "Junior+ Java Developer",
+                "Вакансия младшего специалист продвинутого уровня",
+                LocalDateTime.of(2025, 1, 12, 10, 15, 5)));
+        save(new Vacancy(0, "Middle Java Developer",
+                "Вакансия специалиста со стажем от 3 лет, который способен самостоятельно и с нуля сделать программу или приложение.",
+                LocalDateTime.of(2025, 1, 12, 10, 15, 5)));
+        save(new Vacancy(0, "Middle+ Java Developer",
+                "Вакансия специалиста уровня Middle с продвинутым опытом",
+                LocalDateTime.of(2025, 2, 2, 11, 25, 17)
+                ));
+        save(new Vacancy(0, "Senior Java Developer",
+                "Профессионал с опытом не менее 5 лет, который совмещает обязанности технического руководителя и тимлида в команде программисто",
+                LocalDateTime.of(2025, 2, 6, 1, 32, 56)
+                ));
     }
 
     public static MemoryVacancyRepository getInstance() {
