@@ -3,40 +3,49 @@
 <head th:include="fragments/header :: header"></head>
 <body>
 <div th:replace="fragments/navigation :: navigation"></div>
-<div class="container">
-    <div class="row">
-        <table class="table">
-            <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
-<footer th:include="fragments/footer :: footer"></footer>
+
+<main class="container mt-4">
+    <h2 class="mb-4">Проект job4j_dreamjob</h2>
+
+    <ul class="list-group list-group-flush">
+        <!-- Вакансии -->
+        <li class="list-group-item p-0 border-0">
+            <a th:href="@{/vacancies}"
+               class="d-flex align-items-center px-4 py-3 text-primary text-decoration-underline">
+                <span class="text-dark fs-5 me-3">•</span>
+                Вакансии
+            </a>
+        </li>
+
+        <!-- Кандидаты -->
+        <li class="list-group-item p-0 border-0">
+            <a th:href="@{/candidates}"
+               class="d-flex align-items-center px-4 py-3 text-primary text-decoration-underline">
+                <span class="text-dark fs-5 me-3">•</span>
+                Кандидаты
+            </a>
+        </li>
+
+        <!-- Создать вакансию -->
+        <li class="list-group-item p-0 border-0">
+            <a th:href="@{/vacancies/create}"
+               class="d-flex align-items-center px-4 py-3 text-primary text-decoration-underline">
+                <span class="text-dark fs-5 me-3">•</span>
+                Создать вакансию
+            </a>
+        </li>
+
+        <!-- Создать резюме -->
+        <li class="list-group-item p-0 border-0">
+            <a th:href="@{/candidates/create}"
+               class="d-flex align-items-center px-4 py-3 text-primary text-decoration-underline">
+                <span class="text-dark fs-5 me-3">•</span>
+                Создать резюме
+            </a>
+        </li>
+    </ul>
+</main>
+
+<footer th:replace="fragments/footer :: footer"></footer>
 </body>
 </html>
