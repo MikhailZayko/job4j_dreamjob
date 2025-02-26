@@ -2,50 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:include="fragments/header :: header"></head>
 <body>
-<div th:replace="fragments/navigation :: navigation"></div>
-
-<main class="container mt-4">
-    <h2 class="mb-4">Проект job4j_dreamjob</h2>
-
-    <ul class="list-group list-group-flush">
-        <!-- Вакансии -->
-        <li class="list-group-item p-0 border-0">
-            <a th:href="@{/vacancies}"
-               class="d-flex align-items-center px-4 py-3 text-primary text-decoration-underline">
-                <span class="text-dark fs-5 me-3">•</span>
-                Вакансии
-            </a>
-        </li>
-
-        <!-- Кандидаты -->
-        <li class="list-group-item p-0 border-0">
-            <a th:href="@{/candidates}"
-               class="d-flex align-items-center px-4 py-3 text-primary text-decoration-underline">
-                <span class="text-dark fs-5 me-3">•</span>
-                Кандидаты
-            </a>
-        </li>
-
-        <!-- Создать вакансию -->
-        <li class="list-group-item p-0 border-0">
-            <a th:href="@{/vacancies/create}"
-               class="d-flex align-items-center px-4 py-3 text-primary text-decoration-underline">
-                <span class="text-dark fs-5 me-3">•</span>
-                Создать вакансию
-            </a>
-        </li>
-
-        <!-- Создать резюме -->
-        <li class="list-group-item p-0 border-0">
-            <a th:href="@{/candidates/create}"
-               class="d-flex align-items-center px-4 py-3 text-primary text-decoration-underline">
-                <span class="text-dark fs-5 me-3">•</span>
-                Создать резюме
-            </a>
-        </li>
-    </ul>
+<main>
+    <h2>Проект job4j_dreamjob</h2>
+    <div th:replace="fragments/navigation :: navigation"></div>
 </main>
-
 <footer th:replace="fragments/footer :: footer"></footer>
 </body>
 </html>
