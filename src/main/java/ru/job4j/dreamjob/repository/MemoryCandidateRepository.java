@@ -12,13 +12,11 @@ import java.util.Optional;
 @Repository
 public class MemoryCandidateRepository implements CandidateRepository {
 
-    private static final MemoryCandidateRepository INSTANCE = new MemoryCandidateRepository();
-
     private int nextId = 1;
 
     private final Map<Integer, Candidate> candidates = new HashMap<>();
 
-    private MemoryCandidateRepository() {
+    public MemoryCandidateRepository() {
         save(new Candidate(0, "Петров Иван Васильевич",
                 "Имеет опыт разработки в C++ более 10 лет, Java 2 года",
                 LocalDateTime.of(2025, 1, 9, 12, 30, 59)));
@@ -39,10 +37,6 @@ public class MemoryCandidateRepository implements CandidateRepository {
                 "Разработчик на Java более 2 лет, Pyhton более 3 лет",
                 LocalDateTime.of(2025, 2, 6, 1, 32, 56)
         ));
-    }
-
-    public static MemoryCandidateRepository getInstance() {
-        return INSTANCE;
     }
 
     @Override
