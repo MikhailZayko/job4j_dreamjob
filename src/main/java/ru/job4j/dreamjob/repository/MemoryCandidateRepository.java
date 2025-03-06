@@ -22,23 +22,27 @@ public class MemoryCandidateRepository implements CandidateRepository {
     public MemoryCandidateRepository() {
         save(new Candidate(0, "Петров Иван Васильевич",
                 "Имеет опыт разработки в C++ более 10 лет, Java 2 года",
-                LocalDateTime.of(2025, 1, 9, 12, 30, 59)));
+                LocalDateTime.of(2025, 1, 9, 12, 30, 59), 1
+        ));
         save(new Candidate(0, "Быкова Мария Игоревна",
                 "Java-разработчик, 3 года в биллинговой компании",
-                LocalDateTime.of(2025, 1, 25, 13, 10, 25)));
+                LocalDateTime.of(2025, 1, 25, 13, 10, 25), 2
+        ));
         save(new Candidate(0, "Васильчиков Тарас Сергеевич",
                 "Начинающий разработки на Java",
-                LocalDateTime.of(2025, 1, 12, 10, 15, 5)));
+                LocalDateTime.of(2025, 1, 12, 10, 15, 5), 3
+        ));
         save(new Candidate(0, "Огонькова Любовь Ивановна",
                 "Опыта работы в банке Java-разработчиком более 4 лет",
-                LocalDateTime.of(2025, 1, 12, 10, 15, 5)));
+                LocalDateTime.of(2025, 1, 12, 10, 15, 5), 3
+        ));
         save(new Candidate(0, "Кукушкин Николай Константинович",
                 "Java-разработчик более 7 лет",
-                LocalDateTime.of(2025, 2, 2, 11, 25, 17)
+                LocalDateTime.of(2025, 2, 2, 11, 25, 17), 2
         ));
         save(new Candidate(0, "Круглова Анна Алексеевна",
                 "Разработчик на Java более 2 лет, Pyhton более 3 лет",
-                LocalDateTime.of(2025, 2, 6, 1, 32, 56)
+                LocalDateTime.of(2025, 2, 6, 1, 32, 56), 1
         ));
     }
 
@@ -57,8 +61,13 @@ public class MemoryCandidateRepository implements CandidateRepository {
     @Override
     public boolean update(Candidate candidate) {
         return candidates.computeIfPresent(candidate.getId(),
-                (id, oldCandidate) -> new Candidate(oldCandidate.getId(), candidate.getName(),
-                        candidate.getDescription(), candidate.getCreationDate())) != null;
+                (id, oldCandidate) -> new Candidate(
+                        oldCandidate.getId(),
+                        candidate.getName(),
+                        candidate.getDescription(),
+                        candidate.getCreationDate(),
+                        candidate.getCityId())
+        ) != null;
     }
 
     @Override
