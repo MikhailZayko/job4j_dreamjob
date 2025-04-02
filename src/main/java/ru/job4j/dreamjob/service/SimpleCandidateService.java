@@ -30,18 +30,27 @@ public class SimpleCandidateService implements CandidateService {
 
     @Override
     public boolean deleteById(int id) {
-        findById(id).ifPresent(candidate -> fileService.deleteById(candidate.getFileId()));
-        return candidateRepository.deleteById(id);
+        boolean result = false;
+        var candidateOptional = findById(id);
+        if (candidateOptional.isPresent()) {
+            result = candidateRepository.deleteById(id);
+            fileService.deleteById(candidateOptional.get().getFileId());
+        }
+        return result;
     }
 
     @Override
     public boolean update(Candidate candidate, FileDto image) {
-        if (image.getContent().length != 0) {
-            int oldFileId = candidate.getFileId();
-            saveNewFile(candidate, image);
-            fileService.deleteById(oldFileId);
+        var isNewFileEmpty = image.getContent().length == 0;
+        if (isNewFileEmpty) {
+            return candidateRepository.update(candidate);
         }
-        return candidateRepository.update(candidate);
+        /* если передан новый не пустой файл, то старый удаляем, а новый сохраняем */
+        var oldFileId = candidate.getFileId();
+        saveNewFile(candidate, image);
+        var isUpdated = candidateRepository.update(candidate);
+        fileService.deleteById(oldFileId);
+        return isUpdated;
     }
 
     @Override
