@@ -36,18 +36,27 @@ public class SimpleVacancyService implements VacancyService {
 
     @Override
     public boolean deleteById(int id) {
-        findById(id).ifPresent(vacancy -> fileService.deleteById(vacancy.getFileId()));
-        return vacancyRepository.deleteById(id);
+        boolean result = false;
+        var vacancyOptional = findById(id);
+        if (vacancyOptional.isPresent()) {
+            result = vacancyRepository.deleteById(id);
+            fileService.deleteById(vacancyOptional.get().getFileId());
+        }
+        return result;
     }
 
     @Override
     public boolean update(Vacancy vacancy, FileDto image) {
-        if (image.getContent().length != 0) {
-            int oldFileId = vacancy.getFileId();
-            saveNewFile(vacancy, image);
-            fileService.deleteById(oldFileId);
+        var isNewFileEmpty = image.getContent().length == 0;
+        if (isNewFileEmpty) {
+            return vacancyRepository.update(vacancy);
         }
-        return vacancyRepository.update(vacancy);
+        /* если передан новый не пустой файл, то старый удаляем, а новый сохраняем */
+        var oldFileId = vacancy.getFileId();
+        saveNewFile(vacancy, image);
+        var isUpdated = vacancyRepository.update(vacancy);
+        fileService.deleteById(oldFileId);
+        return isUpdated;
     }
 
     @Override
